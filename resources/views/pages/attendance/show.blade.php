@@ -78,8 +78,8 @@
                                     <td>{{ $detail->created_at }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Lat, Long</th>
-                                    <td>{{ $detail->lat }}, {{ $detail->long }}</td>
+                                    <th>Long, lat</th>
+                                    <td>{{ $detail->long }}, {{ $detail->lat }}</td>
                                 </tr>
                                 <tr>
                                     <th>Address</th>
