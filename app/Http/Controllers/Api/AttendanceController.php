@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\ImageStorage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class AttendanceController extends Controller
@@ -119,5 +120,37 @@ class AttendanceController extends Controller
                 Response::HTTP_UNPROCESSABLE_ENTITY
             );
         }
+    }
+
+    /**
+     * Get List Presences by User
+     * @param Request $request
+     * @return JsonResponse
+     * @throws BindingResolutionException
+     */
+    public function history(Request $request)
+    {
+        $request->validate(
+            [
+                'from' => ['required'],
+                'to' => ['required'],
+            ]
+        );
+
+        $history = $request->user()->attendances()->with('detail')
+            ->whereBetween(
+                DB::raw('DATE(created_at)'),
+                [
+                    $request->from, $request->to
+                ]
+            )->get();
+
+        return response()->json(
+            [
+                'message' => "list of presences by user",
+                'data' => $history,
+            ],
+            Response::HTTP_OK
+        );
     }
 }
