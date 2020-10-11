@@ -98,7 +98,7 @@
                                 </tr>
                                 <tr>
                                     <th>Photo</th>
-                                    <td><img width="350" src="{{ asset('/storage/photo/' . $detail->photo) }}" alt=""></td>
+                                    <td><img width="350" src="{{ asset('/storage/attendance/' . $detail->photo) }}" alt=""></td>
                                 </tr>
                             </tbody>
                         </table>
